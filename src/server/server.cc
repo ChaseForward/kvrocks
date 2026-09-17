@@ -1484,9 +1484,9 @@ Server::InfoEntries Server::GetCpuInfo() {  // NOLINT(readability-convert-member
   for (std::size_t i{0}; i < worker_threads_.size(); ++i) {
     thread_cpu_times[i] = util::ThreadGetCPUTime(worker_threads_[i]->GetNativeHandle());
   }
-  entries.emplace_back(
-      "worker_cpu_time",
-      fmt::format("[{}]", util::StringJoin(thread_cpu_times, [](auto v) { return std::to_string(v); }, ",")));
+  entries.emplace_back("worker_cpu_time",
+                       fmt::format("[{}]", util::StringJoin(
+                                               thread_cpu_times, [](auto v) { return std::to_string(v); }, ",")));
 
   return entries;
 }

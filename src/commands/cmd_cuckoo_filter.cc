@@ -132,7 +132,7 @@ class CommandCFAdd : public Commander {
 };
 
 class CommandCFCount : public Commander {
-public:
+ public:
   Status Parse(const std::vector<std::string> &args) override {
     // CF.COUNT key item
     if (args.size() != 3) {
@@ -157,19 +157,15 @@ public:
     *output = redis::Integer(count);
     return Status::OK();
   }
-
 };
-
-
 
 /* Register commands
   CF.RESERVE
   CF.ADD
   CF.COUNT
 */
-REDIS_REGISTER_COMMANDS(CuckooFilter,
-  MakeCmdAttr<CommandCFReserve>("cf.reserve", -3, "write", 1, 1, 1),
-  MakeCmdAttr<CommandCFAdd>("cf.add", 3, "write", 1, 1, 1),
-  MakeCmdAttr<CommandCFCount>("cf.count", 3, "read-only", 1, 1, 1))
+REDIS_REGISTER_COMMANDS(CuckooFilter, MakeCmdAttr<CommandCFReserve>("cf.reserve", -3, "write", 1, 1, 1),
+                        MakeCmdAttr<CommandCFAdd>("cf.add", 3, "write", 1, 1, 1),
+                        MakeCmdAttr<CommandCFCount>("cf.count", 3, "read-only", 1, 1, 1))
 
 }  // namespace redis

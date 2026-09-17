@@ -204,8 +204,8 @@ rocksdb::Status CuckooChain::Count(engine::Context &ctx, const Slice &user_key, 
 
   for (uint16_t filter_idx = 0; filter_idx < metadata.n_filters; filter_idx++) {
     uint32_t num_buckets = 0;
-    s = CuckooFilterHelper::GetFilterNumBuckets(metadata.base_capacity, metadata.expansion,
-                                                metadata.bucket_size, filter_idx, &num_buckets);
+    s = CuckooFilterHelper::GetFilterNumBuckets(metadata.base_capacity, metadata.expansion, metadata.bucket_size,
+                                                filter_idx, &num_buckets);
     if (!s.ok()) {
       return s;
     }
@@ -220,7 +220,6 @@ rocksdb::Status CuckooChain::Count(engine::Context &ctx, const Slice &user_key, 
     *count += static_cast<uint64_t>(sub_count);
   }
   return rocksdb::Status::OK();
-
 }
 
 rocksdb::Status CuckooChain::tryCuckooInsert(engine::Context &ctx, const Slice &user_key, const std::string &ns_key,
